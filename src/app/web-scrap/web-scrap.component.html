@@ -1,0 +1,68 @@
+<article>
+   <div>
+     
+   </div>    <img class="logo" src="./assets/images/webscrapper.png" alt="node.js logo">
+  <header style="background-image: url('./assets/images/bannerImage.jpg');">
+ 
+  <h1 style="color: azure">Web Page Scraping</h1>
+  </header>
+  <section id="mainContent">
+    <form [formGroup]="formModel" autocomplete="off" (submit)="onSubmit()">
+      <label for="urlText"></label>
+      <h2>Enter a URL below and then click "Scrape"</h2>
+      <input type="text" formControlName="urlInput" name="urlText" id="urlText" placeholder="http://google.com"> &nbsp;
+      <button type="submit" id="submit"> Scrape </button>
+      <br />
+      <div *ngIf="f.urlInput.touched && f.urlInput.invalid">
+        <div *ngIf="f.urlInput.errors.required" style="color:red">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>URL is required.
+        </div>
+        <div *ngIf="f.urlInput.errors.pattern" style="color:red">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Please enter valid url.
+        </div>
+      </div>
+    </form>
+    <div *ngIf="showLoader" id="ajax-loader-container">
+      <img src="./assets/images/ajax-loader.gif" alt="">
+    </div>
+    <div id="data-container"></div>
+    <div class="mx-auto space" *ngIf="showDiv" id="content" #content>
+      <p style="font-weight: bold;"><u>Scraping Result</u></p>
+      <div class="row space">
+        <div class="col-sm-3"><label style="font-weight: bold;">Site Name:</label></div>
+        <div class="col-sm-9"><label id="lblSite">{{lblSite}}</label></div>
+      </div>
+      <div class="row space">
+        <div class="col-sm-3"><label style="font-weight: bold;">Title:</label></div>
+        <div class="col-sm-9"><label id="lblTitle">{{lblTitle}}</label></div>
+      </div>
+      <div class="row space">
+        <div class="col-sm-3"><label style="font-weight: bold;">Meta Description:</label></div>
+        <div class="col-sm-9"><label id="lblDescription">{{lblDescription}}</label></div>
+      </div>
+      <div class="row space">
+        <div class="col-sm-3"><label style="font-weight: bold;">Meta Keywords:</label></div>
+        <div class="col-sm-9"><label id="lblKeywords">{{lblKeywords}}</label></div>
+      </div>
+      <div class="row space">
+        <div class="col-sm-3"><label style="font-weight: bold;">Screen Capture:</label></div>
+        <div class="col-sm-9">
+          <img src="{{'http://localhost:56097/'+imgsrc}}" height="500px" width="800px" />
+        </div>
+      </div>
+      <div class="row space">
+
+        <div class="col-sm-3"><label style="font-weight: bold;">HyperLinks and Social Media Links:</label></div>
+        <div class="col-sm-9" style="overflow: scroll;">
+          <label *ngFor="let link of allLinks;">{{link}}</label>
+        </div>
+      </div>
+      <!-- <div class="row space" style="text-align: center;">
+
+        <input type="button" style="position: absolute;top:50%;" value="Download Report" class="btn" (click)="SavePDF()" style="background-color: rgb(241, 94, 41); color:white;">
+      </div> -->
+
+    </div>
+  </section>
+</article>
+
